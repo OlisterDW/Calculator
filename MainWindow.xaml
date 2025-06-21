@@ -1,0 +1,75 @@
+﻿<Window x:Class="Calculator.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Калькулятор" Height="520" Width="440" RenderTransformOrigin="0.5,0.5" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Window.RenderTransform>
+        <TransformGroup>
+            <ScaleTransform/>
+            <SkewTransform/>
+            <RotateTransform Angle="0"/>
+            <TranslateTransform/>
+        </TransformGroup>
+    </Window.RenderTransform>
+
+
+    <Grid HorizontalAlignment="Center" Height="460" Width ="400" Margin="5,5,5,5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.80*"></RowDefinition>
+            <RowDefinition Height="1*" ></RowDefinition>
+            <RowDefinition Height="0.75*"></RowDefinition>
+            <RowDefinition Height="0.75*" ></RowDefinition>
+            <RowDefinition Height="0.75*"></RowDefinition>
+            <RowDefinition Height="0.75*"></RowDefinition>
+            <RowDefinition Height="0.75*"></RowDefinition>
+            <RowDefinition Height="0.75*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition ></ColumnDefinition>
+            <ColumnDefinition ></ColumnDefinition>
+            <ColumnDefinition ></ColumnDefinition>
+            <ColumnDefinition ></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Label x:Name="SecondLabel" Content="0"  Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="4" Background="White" FontSize="18" VerticalContentAlignment="Bottom" HorizontalContentAlignment="Right"/>
+        <Label x:Name="CalculationLabel" Content="0" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="4" Background="White" FontSize="22" VerticalContentAlignment="Bottom" HorizontalContentAlignment="Right" FontWeight="Bold"/>
+
+        <Button x:Name="PercentButton" Content="%"  Grid.Column="0" Grid.Row="2" Click="NumberButton_Click" FontSize="20" FontWeight="Bold" Background="White"/>
+        <Button x:Name="ClearEntryButton"  Content="CE" Grid.Column="1"  Grid.Row="2" Click="NumberButton_Click" FontSize="20" FontWeight="Bold"  Background="White" />
+        <Button x:Name="ClearButton"  Content="C"   Grid.Column="2"  Grid.Row="2" Click="NumberButton_Click" FontSize="20" FontWeight="Bold" Background="White"/>
+        <Button x:Name="BackspaseButton" Content= "&#9003;" Grid.Column="3"  Grid.Row="2" Click="NumberButton_Click" FontSize="20" FontWeight="Bold"   Background="White" >
+        </Button>
+
+        <Button x:Name="DivideByXButton"  Content="1/x"  Grid.Column="0" Grid.Row="3" Click="NumberButton_Click" FontSize="20" FontWeight="Bold"   Background="White"/>
+        <Button x:Name="XSquareTwoButton" Content="x&#178;"  Grid.Column="1" Grid.Row="3" Click="NumberButton_Click" FontSize="20" FontWeight="Bold"  Background="White"/>
+        <Button x:Name="rootButton"  Content="&#8730;x" Grid.Column="2" Grid.Row="3" Click="NumberButton_Click" FontSize="20" FontWeight="Bold" Background="White" />
+        <Button x:Name="DivisionButton"  Content="&#247;" Grid.Column="3" Grid.Row="3" Click="SignButton_Click" FontSize="20" FontWeight="Bold"  Background="White"/>
+
+        <Button x:Name="SevenButton"  Content="7"  Grid.Column="0" Grid.Row="4" Click="NumberButton_Click" FontSize="20" FontWeight="Bold"   Background="White"/>
+        <Button x:Name="EightButton"  Content="8"  Grid.Column="1" Grid.Row="4" Click="NumberButton_Click" FontSize="20" FontWeight="Bold"  Background="White"/>
+        <Button x:Name="NineButton" Content="9"  Grid.Column="2" Grid.Row="4" Click="NumberButton_Click" FontSize="20" FontWeight="Bold"  Background="White"/>
+        <Button x:Name="MultiplyButton" Content="&#215;" Grid.Column="3" Grid.Row="4" Click="SignButton_Click" FontSize="20" FontWeight="Bold"  Background="White"/>
+
+        <Button x:Name="FourButton"  Content="4"  Grid.Column="0" Grid.Row="5" Click="NumberButton_Click" FontSize="20" FontWeight="Bold"  Background="White" />
+        <Button x:Name="FiveButton"  Content="5" Grid.Column="1" Grid.Row="5" Click="NumberButton_Click" FontSize="20" FontWeight="Bold"   Background="White"/>
+        <Button x:Name="SixButton"  Content="6" Grid.Column="2" Grid.Row="5" Click="NumberButton_Click" FontSize="20" FontWeight="Bold"  Background="White"/>
+        <Button x:Name="MinusButton"  Content="-" Grid.Column="3" Grid.Row="5" Click="SignButton_Click" FontSize="20" FontWeight="Bold"   Background="White" />
+
+        <Button x:Name="OneButton"  Content="1" Grid.Column="0" Grid.Row="6" Click="NumberButton_Click" FontSize="20" FontWeight="Bold"   Background="White"/>
+        <Button x:Name="TwoButton" Content="2" Grid.Column="1" Grid.Row="6" Click="NumberButton_Click" FontSize="20" FontWeight="Bold"  Background="White"/>
+        <Button x:Name="ThreeButton" Content="3" Grid.Column="2" Grid.Row="6" Click="NumberButton_Click" FontSize="20" FontWeight="Bold"   Background="White" />
+        <Button x:Name="PlusButton" Content="+"   Grid.Column="4" Grid.Row="6" Click="SignButton_Click" FontSize="20" FontWeight="Bold"  Background="White" />
+
+        <Button x:Name="PlusMinusSign" Content="&#177;" Grid.Column="0" Grid.Row="7" Click="NumberButton_Click" FontSize="20" FontWeight="Bold"   Background="White"/>
+        <Button x:Name="ZeroButton"  Content="0"  Grid.Column="1" Grid.Row="7" Click="NumberButton_Click" FontSize="20" FontWeight="Bold"   Background="White"/>
+        <Button x:Name="FloatButton" Content=","  Grid.Column="2" Grid.Row="7" Click="NumberButton_Click" FontSize="20" FontWeight="Bold"  Background="White" />
+        <Button x:Name="EqualButton" Content="="  Grid.Column="3" Grid.Row="7" Click="NumberButton_Click" FontSize="20" FontWeight="Bold"  Background="#FFB0C7FF" >
+        </Button>
+
+    </Grid>
+
+
+</Window>
+
+
