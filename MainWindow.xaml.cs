@@ -85,7 +85,15 @@ namespace Calculator
             else
             {
                 secondNumber = InputLabel.Content.ToString();
-                InputLabel.Content = Calculate(decimal.Parse(firstNumber), decimal.Parse(secondNumber), operation);
+
+                if (secondNumber == "0" && operation == "/")
+                {
+                    MessageBox.Show("Ошибка! На ноль делить нельзя!");
+                }
+                else
+                {
+                    InputLabel.Content = Calculate(decimal.Parse(firstNumber), decimal.Parse(secondNumber), operation);
+                }
             }
             CalculationLabel.Content = "";
             operation = "";
@@ -97,6 +105,9 @@ namespace Calculator
         private void AlgebraicSignButton_Click(object sender, RoutedEventArgs e)
         {
             string number = InputLabel.Content.ToString();
+            if (number == "" || number == "0")
+                return;
+
             if (number.StartsWith('-'))
             {
                 InputLabel.Content = number.Remove(0, 1);
@@ -140,7 +151,6 @@ namespace Calculator
                     return null;
             }
         }
-
 
     }
 }
