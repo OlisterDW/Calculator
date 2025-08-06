@@ -4,27 +4,53 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="Калькулятор" Height="520" Width="440" RenderTransformOrigin="0.5,0.5" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
-    <Window.RenderTransform>
-        <TransformGroup>
-            <ScaleTransform/>
-            <SkewTransform/>
-            <RotateTransform Angle="0"/>
-            <TranslateTransform/>
-        </TransformGroup>
-    </Window.RenderTransform>
+        Title="Калькулятор" Height="550" Width="440"  WindowStartupLocation="CenterScreen" >
+    <Window.Background>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="Black"/>
+            <GradientStop Color="#F7ECE6E6" Offset="0.048"/>
+        </LinearGradientBrush>
+    </Window.Background>
+    <Window.Resources>
+        <Style TargetType="Button" x:Key="AllButtons">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" 
+                    CornerRadius="5"
+                BorderBrush="{TemplateBinding BorderBrush}" 
+                    BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                  VerticalAlignment="Center"
+                                  RecognizesAccessKey="True"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Margin" Value="5,5,5,5"></Setter>
+            <Setter Property="FontSize" Value="20"></Setter>
+            <Setter Property="FontWeight" Value="Bold"></Setter>
+        </Style>
 
+        <Style x:Key="NumberButton" TargetType="Button" BasedOn="{StaticResource AllButtons}">
+            <Setter Property="Background" Value="Cornsilk"> </Setter>
+        </Style>
 
-    <Grid HorizontalAlignment="Center" Height="460" Width ="400" Margin="5,5,5,5">
+        <Style x:Key="SignButton" TargetType="Button" BasedOn="{StaticResource AllButtons}">
+            <Setter Property="Background" Value="Black"></Setter>
+            <Setter Property="Foreground" Value="White"></Setter>
+        </Style> 
+    </Window.Resources>
+    <Grid  Margin="5,5,5,5">
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.80*"></RowDefinition>
             <RowDefinition Height="1*" ></RowDefinition>
-            <RowDefinition Height="0.75*"></RowDefinition>
-            <RowDefinition Height="0.75*" ></RowDefinition>
-            <RowDefinition Height="0.75*"></RowDefinition>
-            <RowDefinition Height="0.75*"></RowDefinition>
-            <RowDefinition Height="0.75*"></RowDefinition>
-            <RowDefinition Height="0.75*"></RowDefinition>
+            <RowDefinition Height="1*" ></RowDefinition>
+            <RowDefinition Height="0.80*"></RowDefinition>
+            <RowDefinition Height="0.80*"></RowDefinition>
+            <RowDefinition Height="0.80*"></RowDefinition>
+            <RowDefinition Height="0.80*"></RowDefinition>
+            <RowDefinition Height="0.80*"></RowDefinition>
+            <RowDefinition Height="0.80*"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition ></ColumnDefinition>
@@ -32,40 +58,45 @@
             <ColumnDefinition ></ColumnDefinition>
             <ColumnDefinition ></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Label x:Name="SecondLabel" Content="0"  Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="4" Background="White" FontSize="18" VerticalContentAlignment="Bottom" HorizontalContentAlignment="Right"/>
-        <Label x:Name="CalculationLabel" Content="0" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="4" Background="White" FontSize="22" VerticalContentAlignment="Bottom" HorizontalContentAlignment="Right" FontWeight="Bold"/>
+        <Label x:Name="CalculationLabel" Content="" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="4"  FontSize="22" VerticalContentAlignment="Bottom" HorizontalContentAlignment="Right" FontWeight="Bold" Margin="5,15,5, 15">
+            <Label.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFD8D8D8" Offset="0.562"/>
+                    <GradientStop Color="White" Offset="0.43"/>
+                </LinearGradientBrush>
+            </Label.Background>
+        </Label>
+        <Label x:Name="InputLabel" Content="" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="4"  FontSize="22" VerticalContentAlignment="Bottom" HorizontalContentAlignment="Right" FontWeight="Bold" Margin="5,15,5, 15">
+            <Label.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFD8D8D8" Offset="0.562"/>
+                    <GradientStop Color="White" Offset="0.43"/>
+                </LinearGradientBrush>
+            </Label.Background>
+        </Label>
 
-        <Button x:Name="PercentButton" Content="%"  Grid.Column="0" Grid.Row="2" Click="NumberButton_Click" FontSize="20" FontWeight="Bold" Background="White"/>
-        <Button x:Name="ClearEntryButton"  Content="CE" Grid.Column="1"  Grid.Row="2" Click="NumberButton_Click" FontSize="20" FontWeight="Bold"  Background="White" />
-        <Button x:Name="ClearButton"  Content="C"   Grid.Column="2"  Grid.Row="2" Click="NumberButton_Click" FontSize="20" FontWeight="Bold" Background="White"/>
-        <Button x:Name="BackspaseButton" Content= "&#9003;" Grid.Column="3"  Grid.Row="2" Click="NumberButton_Click" FontSize="20" FontWeight="Bold"   Background="White" >
-        </Button>
+        <Button x:Name="ClearButton" Style="{StaticResource AllButtons}" Background="Red" Foreground="White" Content="C"  Grid.Column="2" Grid.Row="2" Click="ClearButton_Click" />
+        <Button x:Name="DivideButton" Style="{StaticResource SignButton}" Content="/" Grid.Column="3" Grid.Row="3" Click="SignButton_Click" />
 
-        <Button x:Name="DivideByXButton"  Content="1/x"  Grid.Column="0" Grid.Row="3" Click="NumberButton_Click" FontSize="20" FontWeight="Bold"   Background="White"/>
-        <Button x:Name="XSquareTwoButton" Content="x&#178;"  Grid.Column="1" Grid.Row="3" Click="NumberButton_Click" FontSize="20" FontWeight="Bold"  Background="White"/>
-        <Button x:Name="rootButton"  Content="&#8730;x" Grid.Column="2" Grid.Row="3" Click="NumberButton_Click" FontSize="20" FontWeight="Bold" Background="White" />
-        <Button x:Name="DivisionButton"  Content="&#247;" Grid.Column="3" Grid.Row="3" Click="SignButton_Click" FontSize="20" FontWeight="Bold"  Background="White"/>
+        <Button x:Name="SevenButton" Style="{StaticResource NumberButton}" Content="7"  Grid.Column="0" Grid.Row="4" Click="NumberButton_Click"/>
+        <Button x:Name="EightButton"  Style="{StaticResource NumberButton}" Content="8"  Grid.Column="1" Grid.Row="4" Click="NumberButton_Click" />
+        <Button x:Name="NineButton" Style="{StaticResource NumberButton}"  Content="9"  Grid.Column="2" Grid.Row="4" Click="NumberButton_Click" />
+        <Button x:Name="PlusButton" Style="{StaticResource SignButton}" Content="+"   Grid.Column="3" Grid.Row="4" Click="SignButton_Click" />
 
-        <Button x:Name="SevenButton"  Content="7"  Grid.Column="0" Grid.Row="4" Click="NumberButton_Click" FontSize="20" FontWeight="Bold"   Background="White"/>
-        <Button x:Name="EightButton"  Content="8"  Grid.Column="1" Grid.Row="4" Click="NumberButton_Click" FontSize="20" FontWeight="Bold"  Background="White"/>
-        <Button x:Name="NineButton" Content="9"  Grid.Column="2" Grid.Row="4" Click="NumberButton_Click" FontSize="20" FontWeight="Bold"  Background="White"/>
-        <Button x:Name="MultiplyButton" Content="&#215;" Grid.Column="3" Grid.Row="4" Click="SignButton_Click" FontSize="20" FontWeight="Bold"  Background="White"/>
+        <Button x:Name="FourButton"  Style="{StaticResource NumberButton}" Content="4"  Grid.Column="0" Grid.Row="5" Click="NumberButton_Click"  />
+        <Button x:Name="FiveButton" Style="{StaticResource NumberButton}"  Content="5" Grid.Column="1" Grid.Row="5" Click="NumberButton_Click" />
+        <Button x:Name="SixButton"  Style="{StaticResource NumberButton}" Content="6" Grid.Column="2" Grid.Row="5" Click="NumberButton_Click"/>
+        <Button x:Name="MinusButton" Style="{StaticResource SignButton}" Content="-" Grid.Column="3" Grid.Row="5" Click="SignButton_Click"/>
 
-        <Button x:Name="FourButton"  Content="4"  Grid.Column="0" Grid.Row="5" Click="NumberButton_Click" FontSize="20" FontWeight="Bold"  Background="White" />
-        <Button x:Name="FiveButton"  Content="5" Grid.Column="1" Grid.Row="5" Click="NumberButton_Click" FontSize="20" FontWeight="Bold"   Background="White"/>
-        <Button x:Name="SixButton"  Content="6" Grid.Column="2" Grid.Row="5" Click="NumberButton_Click" FontSize="20" FontWeight="Bold"  Background="White"/>
-        <Button x:Name="MinusButton"  Content="-" Grid.Column="3" Grid.Row="5" Click="SignButton_Click" FontSize="20" FontWeight="Bold"   Background="White" />
+        <Button x:Name="OneButton"  Style="{StaticResource NumberButton}" Content="1" Grid.Column="0" Grid.Row="6" Click="NumberButton_Click" />
+        <Button x:Name="TwoButton" Style="{StaticResource NumberButton}" Content="2" Grid.Column="1" Grid.Row="6" Click="NumberButton_Click" />
+        <Button x:Name="ThreeButton" Style="{StaticResource NumberButton}" Content="3" Grid.Column="2" Grid.Row="6" Click="NumberButton_Click" />
+        <Button x:Name="MultiplyButton" Style="{StaticResource SignButton}" Content="&#215;" Grid.Column="3" Grid.Row="6" Click="SignButton_Click"/>
 
-        <Button x:Name="OneButton"  Content="1" Grid.Column="0" Grid.Row="6" Click="NumberButton_Click" FontSize="20" FontWeight="Bold"   Background="White"/>
-        <Button x:Name="TwoButton" Content="2" Grid.Column="1" Grid.Row="6" Click="NumberButton_Click" FontSize="20" FontWeight="Bold"  Background="White"/>
-        <Button x:Name="ThreeButton" Content="3" Grid.Column="2" Grid.Row="6" Click="NumberButton_Click" FontSize="20" FontWeight="Bold"   Background="White" />
-        <Button x:Name="PlusButton" Content="+"   Grid.Column="4" Grid.Row="6" Click="SignButton_Click" FontSize="20" FontWeight="Bold"  Background="White" />
-
-        <Button x:Name="PlusMinusSign" Content="&#177;" Grid.Column="0" Grid.Row="7" Click="NumberButton_Click" FontSize="20" FontWeight="Bold"   Background="White"/>
-        <Button x:Name="ZeroButton"  Content="0"  Grid.Column="1" Grid.Row="7" Click="NumberButton_Click" FontSize="20" FontWeight="Bold"   Background="White"/>
-        <Button x:Name="FloatButton" Content=","  Grid.Column="2" Grid.Row="7" Click="NumberButton_Click" FontSize="20" FontWeight="Bold"  Background="White" />
-        <Button x:Name="EqualButton" Content="="  Grid.Column="3" Grid.Row="7" Click="NumberButton_Click" FontSize="20" FontWeight="Bold"  Background="#FFB0C7FF" >
-        </Button>
+        <Button x:Name="AlgebraicSignButton" Style="{StaticResource NumberButton}" Content="+/-"  Grid.Column="0" Grid.Row="7" Click="AlgebraicSignButton_Click" />
+        <Button x:Name="ZeroButton" Style="{StaticResource NumberButton}" Content="0"  Grid.Column="1" Grid.Row="7" Click="NumberButton_Click" />
+        <Button x:Name="FloatPointButton" Style="{StaticResource NumberButton}" Content=","  Grid.Column="2" Grid.Row="7" Click="FloatPointButton_Click" />
+        <Button x:Name="EqualButton" Style="{StaticResource SignButton}" Content="="  Grid.Column="3" Grid.Row="7" Click="EqualButton_Click" />
 
     </Grid>
 
