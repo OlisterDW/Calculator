@@ -75,7 +75,10 @@
             </Label.Background>
         </Label>
 
-        <Button x:Name="ClearButton" Style="{StaticResource AllButtons}" Background="Red" Foreground="White" Content="C"  Grid.Column="2" Grid.Row="2" Click="ClearButton_Click" />
+        <Button x:Name="ClearButton" Style="{StaticResource AllButtons}" Background="Red" Foreground="White" Content="C"  Grid.Column="1" Grid.Row="2" Click="ClearButton_Click" />
+        <Button x:Name="BackSpaceButton" Style="{StaticResource SignButton}" Content="⌫" Grid.Column="2" Grid.Row="2" Grid.ColumnSpan="2" Click="BackSpaceButton_Click" />
+        
+        <Button x:Name="PercentButtonButton" Style="{StaticResource SignButton}" Content="%" Grid.Column="0" Grid.Row="3" Click="PercentButton_Click" />
         <Button x:Name="DivideButton" Style="{StaticResource SignButton}" Content="/" Grid.Column="3" Grid.Row="3" Click="SignButton_Click" />
 
         <Button x:Name="SevenButton" Style="{StaticResource NumberButton}" Content="7"  Grid.Column="0" Grid.Row="4" Click="NumberButton_Click"/>

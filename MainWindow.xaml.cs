@@ -5,9 +5,6 @@ using System.Windows.Controls;
 
 namespace Calculator
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         private string firstNumber { get; set; }
@@ -76,25 +73,19 @@ namespace Calculator
             CalculationLabel.Content = firstNumber + operation;
             InputLabel.Content = "";
         }
+
         private void EqualButton_Click(object sender, RoutedEventArgs e)
         {
-            if (InputLabel.Content == "")
+            if (CalculationLabel.Content != "" && InputLabel.Content == "")
             {
-                InputLabel.Content = Calculate(decimal.Parse(firstNumber), 0, operation);
+                firstNumber = Calculate(decimal.Parse(firstNumber), 0, operation);
             }
-            else
+            else if(CalculationLabel.Content != "" && InputLabel.Content != "")
             {
                 secondNumber = InputLabel.Content.ToString();
-
-                if (secondNumber == "0" && operation == "/")
-                {
-                    MessageBox.Show("Ошибка! На ноль делить нельзя!");
-                }
-                else
-                {
-                    InputLabel.Content = Calculate(decimal.Parse(firstNumber), decimal.Parse(secondNumber), operation);
-                }
+                firstNumber  = Calculate(decimal.Parse(firstNumber), decimal.Parse(secondNumber), operation);
             }
+            InputLabel.Content = firstNumber;
             CalculationLabel.Content = "";
             operation = "";
             firstNumber = "";
@@ -135,9 +126,45 @@ namespace Calculator
             secondNumber = "";
         }
 
-        private string Calculate(decimal firstNumber, decimal secondNumber, string sign)
+        private void PercentButton_Click(object sender, RoutedEventArgs e)
         {
-            switch (sign)
+            if (CalculationLabel.Content == "" && InputLabel.Content != "")
+            {
+                InputLabel.Content = (decimal.Parse(InputLabel.Content.ToString()) / 100).ToString();
+                
+            }
+            else if (CalculationLabel.Content != "" && InputLabel.Content == "")
+            {
+                decimal percent = (decimal.Parse(firstNumber) / 100);
+                firstNumber = Calculate(decimal.Parse(firstNumber), percent, operation);
+                secondNumber = "";
+                operation = "";
+                CalculationLabel.Content = firstNumber;
+                InputLabel.Content = "";
+            }
+            else
+            {
+                secondNumber = InputLabel.Content.ToString();
+                decimal percent = decimal.Parse(firstNumber) * decimal.Parse(secondNumber) / 100;
+                firstNumber = Calculate(decimal.Parse(firstNumber), percent, operation);
+                secondNumber = "";
+                operation = "";
+                CalculationLabel.Content = firstNumber;
+                InputLabel.Content = "";
+            }
+
+        }
+        private void BackSpaceButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (InputLabel.Content != "")
+            {
+                InputLabel.Content = InputLabel.Content.ToString().Substring(0, InputLabel.Content.ToString().Length - 1);
+            }
+        }
+
+        private string Calculate(decimal firstNumber, decimal secondNumber, string operation)
+        {
+            switch (operation)
             {
                 case "+":
                     return (firstNumber + secondNumber).ToString();
@@ -152,5 +179,6 @@ namespace Calculator
             }
         }
 
+        
     }
 }
