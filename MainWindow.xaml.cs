@@ -58,7 +58,7 @@ namespace Calculator
 
                 secondNumber = InputLabel.Content.ToString().TrimEnd(',');
 
-                if (secondNumber == "0" && operation == "/")
+                if (secondNumber == "0" && operation == "÷")
                 {
                     MessageBox.Show("Ошибка! На ноль делить нельзя!");
                 }
@@ -85,7 +85,12 @@ namespace Calculator
                 secondNumber = InputLabel.Content.ToString();
                 firstNumber  = Calculate(decimal.Parse(firstNumber), decimal.Parse(secondNumber), operation);
             }
-            InputLabel.Content = firstNumber;
+
+            if (!String.IsNullOrEmpty(firstNumber))
+            {
+                InputLabel.Content = firstNumber;
+            }
+
             CalculationLabel.Content = "";
             operation = "";
             firstNumber = "";
@@ -117,7 +122,7 @@ namespace Calculator
             }
         }
 
-        private void ClearButton_Click(object sender, RoutedEventArgs e)
+        private void ClearAllButton_Click(object sender, RoutedEventArgs e)
         {
             CalculationLabel.Content = "";
             InputLabel.Content = "";
@@ -147,18 +152,82 @@ namespace Calculator
                 secondNumber = InputLabel.Content.ToString();
                 decimal percent = decimal.Parse(firstNumber) * decimal.Parse(secondNumber) / 100;
                 firstNumber = Calculate(decimal.Parse(firstNumber), percent, operation);
+                InputLabel.Content = firstNumber;
+                secondNumber = "";
+                firstNumber = "";
+                operation = "";
+                CalculationLabel.Content = "";
+            }
+
+        }
+        private void PowerOfTwoButton_Click(object sender, RoutedEventArgs e)
+        {
+
+            if (CalculationLabel.Content == "" && InputLabel.Content != "")
+            {
+                double number = double.Parse(InputLabel.Content.ToString());
+                InputLabel.Content = ((decimal)Math.Pow(number, 2)).ToString();
+            }
+            else if (CalculationLabel.Content != "" && InputLabel.Content == "")
+            {
+                decimal secondNumberInDecimal = (decimal)Math.Pow(double.Parse(firstNumber), 2);
+                firstNumber = Calculate(decimal.Parse(firstNumber), secondNumberInDecimal, operation);
                 secondNumber = "";
                 operation = "";
                 CalculationLabel.Content = firstNumber;
                 InputLabel.Content = "";
             }
-
+            else
+            {
+                secondNumber = InputLabel.Content.ToString();
+                decimal secondNumberInDecimal = (decimal)Math.Pow(double.Parse(firstNumber), 2);
+                firstNumber = Calculate(decimal.Parse(firstNumber), secondNumberInDecimal, operation);
+                InputLabel.Content = firstNumber;
+                secondNumber = "";
+                firstNumber = "";
+                operation = "";
+                CalculationLabel.Content = "";
+            }
         }
         private void BackSpaceButton_Click(object sender, RoutedEventArgs e)
         {
             if (InputLabel.Content != "")
             {
                 InputLabel.Content = InputLabel.Content.ToString().Substring(0, InputLabel.Content.ToString().Length - 1);
+            }
+        }
+
+        private void ClearInputButton_Click(object sender, RoutedEventArgs e)
+        {
+            InputLabel.Content = "";
+        }
+
+        private void SquareRootButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (CalculationLabel.Content == "" && InputLabel.Content != "")
+            {
+                double number = double.Parse(InputLabel.Content.ToString());
+                InputLabel.Content = ((decimal)Math.Sqrt(number)).ToString();
+            }
+            else if (CalculationLabel.Content != "" && InputLabel.Content == "")
+            {
+                decimal secondNumberInDecimal = (decimal)Math.Sqrt(double.Parse(firstNumber));
+                firstNumber = Calculate(decimal.Parse(firstNumber), secondNumberInDecimal, operation);
+                secondNumber = "";
+                operation = "";
+                CalculationLabel.Content = firstNumber;
+                InputLabel.Content = "";
+            }
+            else
+            {
+                secondNumber = InputLabel.Content.ToString();
+                decimal secondNumberInDecimal = (decimal)Math.Sqrt(double.Parse(firstNumber));
+                firstNumber = Calculate(decimal.Parse(firstNumber), secondNumberInDecimal, operation);
+                InputLabel.Content = firstNumber;
+                secondNumber = "";
+                firstNumber = "";
+                operation = "";
+                CalculationLabel.Content = "";
             }
         }
 
@@ -172,7 +241,7 @@ namespace Calculator
                     return (firstNumber - secondNumber).ToString();
                 case "×":
                     return (firstNumber * secondNumber).ToString();
-                case "/":
+                case "÷":
                     return (firstNumber / secondNumber).ToString();
                 default:
                     return null;
